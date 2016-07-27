@@ -28,7 +28,7 @@ while (my $query = $input->next_seq) {
 	my $querylength = $query->length;
 	my $subseqstart = 0;
 	my $subseqend = 0;
-		do { 
+		while ($processcount <= $querylength-$primerlength) {
 			$processcount++;
 			my $subseqstart = $processcount; 
 			my $subseqend = $subseqstart+$primerlength-1;
@@ -36,6 +36,6 @@ while (my $query = $input->next_seq) {
 			my $tm=`oligotm -tp 1 -sc 1 $seqstr`;
 				if ($tm >= $targettm) {
 					print "$querytitle\t$subseqstart\t$subseqend\t$seqstr\t$tm\n";
-	 			} 
-	 	} while $subseqend <= 200;	
+	 	}
+	 }	
 }
